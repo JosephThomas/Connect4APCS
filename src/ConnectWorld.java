@@ -20,7 +20,7 @@ import java.util.concurrent.Semaphore;
 public class ConnectWorld extends World<Piece>
 {
     /** The Othello game */
-    private OthelloGame game;
+    private ConnectGame game;
 
     /** A semaphore to prevent getPlayerLocation from executing
      *  before setPlayerLocation */
@@ -33,7 +33,7 @@ public class ConnectWorld extends World<Piece>
      * Construct an Othello world
      * game The Othello game
      */
-    public ConnectWorld(OthelloGame game)
+    public ConnectWorld(ConnectGame game)
     {
         super(new BoundedGrid<Piece>(6, 7));
 
