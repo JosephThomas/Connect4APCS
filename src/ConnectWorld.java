@@ -1,6 +1,7 @@
 import info.gridworld.world.World;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
+
 import java.awt.Color;
 import java.util.concurrent.Semaphore;
 
@@ -40,11 +41,19 @@ public class ConnectWorld extends World<Piece>
         this.game = game;
         lock = new Semaphore(0);
         playerLocation = null;
-        setMessage("Othello - You are blue.  Click a cell to play.");
+        setMessage("Connect Four - You are Black.  Click a cell to play.");
+        
 
         System.setProperty("info.gridworld.gui.selection", "hide");
         System.setProperty("info.gridworld.gui.tooltips", "hide");
         System.setProperty("info.gridworld.gui.watermark", "hide");
+        for (int x = 0; x < getGrid().getNumRows(); x++) {
+
+            for (int y = 0; y < getGrid().getNumCols(); y++) {
+                add(new Location(x, y), new Piece(Color.white));
+
+            }
+        }
     }
 
     /**
