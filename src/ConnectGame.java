@@ -47,8 +47,8 @@ public class ConnectGame
     {
         world = new ConnectWorld(this);
         players = new ConnectPlayer[2];
-        players[0] = new HumanConnectPlayer(world);
-        players[1] = new StupidComputerConnectPlayer(world);
+        players[0] = new HoomanPlayer(world);
+        players[1] = new EasyAI(world);
         playerIndex = 0;
         
         
@@ -105,12 +105,12 @@ public class ConnectGame
     
    //accessors used primarily for testing
     
-    protected OthelloWorld getOthelloWorld()
+    protected ConnectWorld getConnectWorld()
     {
         return world;
     }
     
-    protected OthelloPlayer[] getOthelloPlayer()
+    protected ConnectPlayer[] getConnectPlayer()
     {
         return players;
     }
