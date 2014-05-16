@@ -108,7 +108,7 @@ public abstract class ConnectPlayer
                 if ( second != null && !second.equals( adjacent ) )
                     allowedLocations.add( empty );
             }
-        return this.getEmptyLocations();
+        return allowedLocations;
     }
 
 
@@ -152,7 +152,7 @@ public abstract class ConnectPlayer
         {
             for ( int j = 0; j < bloard.getNumCols(); j++ )
             {
-                if ( bloard.get( new Location( i, j ) ) == null )
+                if ( bloard.get( new Location( i, j ) ).getColor() != Color.BLUE && bloard.get( new Location( i, j ) ).getColor() != Color.RED)
                 {
                     unOccupied.add( new Location( i, j ) );
                 }
