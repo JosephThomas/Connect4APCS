@@ -1,18 +1,20 @@
 /**
- * OthelloRunner.java
+ * ConnectRunner.java
  * 
- * Application that creates a new Othello game and plays it.
+ * Application that creates a new Connect game and plays it. It displays the
+ * correct messages and lets the player choose the level of difficulty of
+ * the AI
  * 
  *  @author  Joseph Thomas
  *  @author  5101324
- *  @version 4/8/14
+ *  @version 5/14/14
  *  @author  Period: 2
- *  @author  Assignment: GWOthello
+ *  @author  Assignment: CS Final Project
  * 
- *  @author  Sources: Snarfed
+ *  @author  Sources: None
  */
 public class ConnectRunner {
-    public static void main(String... args) {
+    public static void main(String[] args) {
         ConnectGame n = new ConnectGame();
         n.playGame();
     }
