@@ -2,15 +2,15 @@ import info.gridworld.grid.Location;
 import java.awt.Color;
 
 /**
- * HumanOthelloPlayer.java
+ * HoomanPlayer.java
  * 
- * A <CODE>HumanOthelloPlayer</CODE> object represents a
- * human Othello player.
+ * A <CODE>HoomanPlayer</CODE> object represents a
+ * human Connect player.
  */
 public class HoomanPlayer extends ConnectPlayer
 {
     /**
-     * Constructs a human Othello player.
+     * Constructs a human Connect player.
      * @param world the world
      */
     public HoomanPlayer(ConnectWorld world)

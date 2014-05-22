@@ -6,9 +6,12 @@ import java.awt.Color;
 import java.util.concurrent.Semaphore;
 
 /**
- * OthelloWorld.java
+ * This holds all the pieces of the game, and it uses Grid World to represent
+ * all the pieces in a GUI.
  * 
- * An <CODE>OthelloWorld</CODE> object represents an Othello world.
+ * ConnectWorld.java
+ * 
+ * An <CODE>ConnectWorld</CODE> object represents an Connect world.
  * 
  *  @author  Joseph Thomas
  *  @author  5101324
@@ -20,7 +23,7 @@ import java.util.concurrent.Semaphore;
  */
 public class ConnectWorld extends World<Piece>
 {
-    /** The Othello game */
+    /** The Connect game */
     private ConnectGame game;
 
     /** A semaphore to prevent getPlayerLocation from executing

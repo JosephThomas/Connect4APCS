@@ -3,28 +3,28 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 /**
- * StupidComputerOthelloPlayer.java
+ * EasyAI.java
  * 
- * A <CODE>StupidComputerPlayer</CODE> object represents a computer player
- * who selects a move by randomly chosing from the allowed locations.
+ * A <CODE>EasyAI</CODE> object represents a computer player
+ * who selects a move by randomly choosing from the allowed locations.
  * 
  *  @author  Joseph Thomas
  *  @author  5101324
  *  @version 4/8/14
  *  @author  Period: 2
- *  @author  Assignment: GWOthello
+ *  @author  Assignment: Connect4
  * 
- *  @author  Sources: Snarfed
+ *  @author  Sources: None
  */
 public class EasyAI extends ConnectPlayer
 {
     /**
-     * Constructs a stupid computer player.
+     * Constructs an EasyAI.
      * @param world the world
      */
     public EasyAI(ConnectWorld world)
     {
-        super(world, "Computer", Color.RED);
+        super(world, "EasyComputer", Color.RED);
     }
 
     /**

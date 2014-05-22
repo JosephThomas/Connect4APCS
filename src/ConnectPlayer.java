@@ -5,7 +5,7 @@ import java.awt.Color;
 
 
 /**
- * OthelloPlayer.java
+ * ConnectPlayer.java
  * 
  * This is the top-level class for all player classes.
  * 
@@ -13,9 +13,9 @@ import java.awt.Color;
  * @author 5101324
  * @version 4/8/14
  * @author Period: 2
- * @author Assignment: GWOthello
+ * @author Assignment: Connect4
  * 
- * @author Sources: Snarfed
+ * @author Sources: None
  */
 public abstract class ConnectPlayer
 {
@@ -25,7 +25,7 @@ public abstract class ConnectPlayer
     /** The grid */
     Grid<Piece> bloard;
 
-    /** The name of the player ("Human" or "Computer") */
+    /** The name of the player */
     String name;
 
     /** The color of this player's game pieces */
@@ -34,7 +34,7 @@ public abstract class ConnectPlayer
 
 
     /**
-     * Constructs an Othello player object.
+     * Constructs an ConnectPlayer object.
      * 
      * @param w
      *            the world
@@ -72,9 +72,9 @@ public abstract class ConnectPlayer
 
 
     /**
-     * Gets the Othello world.
+     * Gets the Connect world.
      * 
-     * @return the Othello world
+     * @return the Connect world
      */
     public ConnectWorld getWorld()
     {
@@ -94,20 +94,39 @@ public abstract class ConnectPlayer
 
 
     /**
-     * Computers the list of locations that the player may play
+     * Computes the list of locations that the player may play
      * 
-     * @return allowed (legal) plays (locations) for this player
+     * @return an arrayList of all the possible locations that a piece can be 
+     * placed
      */
     public ArrayList<Location> getAllowedPlays()
     {
+//        ArrayList<Location> allowedLocations = new ArrayList<Location>();
+//        for ( Location empty : getEmptyLocations() )
+//            for ( Location adjacent : bloard.getOccupiedAdjacentLocations( empty ) )
+//            {
+//                Location second = getNextLocationWithColor( empty, adjacent );
+//                if ( second != null && !second.equals( adjacent ) )
+//                    allowedLocations.add( empty );
+//            }
+//        return allowedLocations;
         ArrayList<Location> allowedLocations = new ArrayList<Location>();
-        for ( Location empty : getEmptyLocations() )
-            for ( Location adjacent : bloard.getOccupiedAdjacentLocations( empty ) )
+        for ( int z = 0; z < 7; z++ )
+        {
+            for ( int g = 5; g >= 0; g-- )
             {
-                Location second = getNextLocationWithColor( empty, adjacent );
-                if ( second != null && !second.equals( adjacent ) )
-                    allowedLocations.add( empty );
+                if ( getWorld().getGrid()
+                    .get( new Location( g, z ) )
+                    .getColor()
+                    .equals( Color.white ) )
+                {
+                    allowedLocations.add( new Location( g, z ) );
+                    break;
+                }
+
             }
+        }
+
         return allowedLocations;
     }
 
@@ -126,86 +145,12 @@ public abstract class ConnectPlayer
 
 
     /**
-     * Make the play indicated by calling getPlay. (Place a piece and "flip" the
-     * appropriate other pieces.)
+     * Make the play indicated by calling getPlay.Changes the color of the
+     * piece in that location.
      */
     public void play()
     {
         Location playLocation = getPlay();
-        bloard.put( playLocation, new Piece( color ) );
-        for ( Location adjacent : bloard.getOccupiedAdjacentLocations( playLocation ) )
-            if ( getNextLocationWithColor( playLocation, adjacent ) != null )
-                flipColorOfPieces( adjacent,
-                    getNextLocationWithColor( playLocation, adjacent ) );
-    }
-
-
-    /**
-     * Determines the empty locations on the board.
-     * 
-     * @return a list of the empty board locations
-     */
-    private ArrayList<Location> getEmptyLocations()
-    {
-        ArrayList<Location> unOccupied = new ArrayList<Location>();
-        for ( int i = 0; i < bloard.getNumRows(); i++ )
-        {
-            for ( int j = 0; j < bloard.getNumCols(); j++ )
-            {
-                if ( bloard.get( new Location( i, j ) ).getColor() != Color.BLUE && bloard.get( new Location( i, j ) ).getColor() != Color.RED)
-                {
-                    unOccupied.add( new Location( i, j ) );
-                }
-            }
-        }
-        return unOccupied;
-    }
-
-
-    /**
-     * Finds the next location with this player's color beginning with second in
-     * the direction from first to second.
-     * 
-     * @param first
-     *            first location
-     * @param second
-     *            second location
-     * @return next location with this player's color in the direction from
-     *         first to second starting with second
-     */
-    private Location getNextLocationWithColor( Location first, Location second )
-    {
-        int direction = first.getDirectionToward( second );
-        while ( true )
-        {
-            if ( !bloard.isValid( second ) )
-                return null;
-            if ( bloard.get( second ) == null )
-                return null;
-            if ( bloard.get( second ).getColor() == color )
-                return second;
-            second = second.getAdjacentLocation( direction );
-        }
-    }
-
-
-    /**
-     * Changes (flips) the color of the pieces to the current player's color in
-     * the locations from start (included) to end (not included)
-     * 
-     * @param start
-     *            first location to color (flip)
-     * @param end
-     *            first location past last location to color (flip)
-     */
-    private void flipColorOfPieces( Location start, Location end )
-    {
-        int direction = start.getDirectionToward( end );
-        bloard.get( start ).setColor( color );
-        while ( !start.equals( end ) )
-        {
-            start = start.getAdjacentLocation( direction );
-            bloard.get( start ).setColor( color );
-        }
+        bloard.get(playLocation).setColor(color);
     }
 }
