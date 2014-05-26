@@ -15,7 +15,7 @@
  */
 public class ConnectRunner {
     public static void main(String[] args) {
-        ConnectGame n = new ConnectGame();
+        ConnectGame n = new ConnectGame(true,"easy");
         n.playGame();
     }
 }

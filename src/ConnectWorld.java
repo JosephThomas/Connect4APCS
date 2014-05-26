@@ -60,14 +60,25 @@ public class ConnectWorld extends World<Piece>
     }
 
     /**
-     * Handles the mouse location click.
+     * Handles the mouse location click. Puts the piece in the lowest section of
+     * the column
      * @param loc the location that was clicked
      * @return true because the click has been handled
      */
     @Override
     public boolean locationClicked(Location loc)
     {
-        setPlayerLocation(loc);
+        Location locs = loc;
+        for (int x = 5; x > 0; x--) {
+            if (getGrid().get(new Location(x, loc.getCol())).getColor()
+                    .equals(Color.white)) {
+                locs = new Location(x, loc.getCol());
+                break;
+            }
+
+        }
+
+        setPlayerLocation(locs);
         return true;
     }
 

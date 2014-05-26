@@ -147,10 +147,23 @@ public abstract class ConnectPlayer
     /**
      * Make the play indicated by calling getPlay.Changes the color of the
      * piece in that location.
+     * @return 
      */
-    public void play()
+    public Location play()
     {
         Location playLocation = getPlay();
         bloard.get(playLocation).setColor(color);
+        return getPlay();
+    }
+    
+
+    /**
+     * Returns the color of the player
+     * 
+     * @return color the color of the player
+     */
+    public Color getColor()
+    {
+        return color;
     }
 }
