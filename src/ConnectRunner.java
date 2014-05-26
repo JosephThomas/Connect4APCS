@@ -13,7 +13,7 @@ import java.util.Scanner;
  *  @author  Period: 2
  *  @author  Assignment: CS Final Project
  * 
- *  @author  Sources: None
+ *  @author  Sources: Anshuman Dikhit, Vishwa Kode
  */
 public class ConnectRunner {
     /**

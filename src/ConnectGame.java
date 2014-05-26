@@ -126,49 +126,77 @@ public class ConnectGame
         // result += "It's a tie!";
         // else
         // result += players[playerIndex].getName() + " to play.";
+//        // Stuffington
+//        String result = "";
+//        Color c;
+//        // if (((playerIndex + 1) % 2) == 0) {
+//        // c = Color.BLACK;
+//        // } else {
+//        // c = Color.RED;
+//        // }
+//        c = players[Math.abs( playerIndex - 1 )].getColor();
+//        if ( hasWon( loc, c ) )
+//        {
+//            if ( Math.abs( playerIndex - 1 ) == 0 )
+//            {
+//                result += "You won!";
+//                JOptionPane.showMessageDialog( null,
+//                    "You won!",
+//                    "Victory!",
+//                    JOptionPane.INFORMATION_MESSAGE );
+//                win = true;
+//
+//            }
+//            else
+//            {
+//                result += "I won!";
+//                JOptionPane.showMessageDialog( null,
+//                    "I won!",
+//                    "Defeat",
+//                    JOptionPane.INFORMATION_MESSAGE );
+//                win = true;
+//            }
+//        }
+//        else if ( !players[0].canPlay() && !players[1].canPlay() )
+//        {
+//            result += "You both lose -_-";
+//            JOptionPane.showMessageDialog( null,
+//                "Losers",
+//                "Defeat",
+//                JOptionPane.INFORMATION_MESSAGE );
+//            win = true;
+//        }
+//        else
+//        {
+//            result = players[playerIndex].getName() + " to play.";
+//        }
+//
+//        return result;
+//        // Stuffington
         String result = "";
         Color c;
-        // if (((playerIndex + 1) % 2) == 0) {
-        // c = Color.BLACK;
-        // } else {
-        // c = Color.RED;
-        // }
-        c = players[Math.abs( playerIndex - 1 )].getColor();
-        if ( hasWon( loc, c ))
-        {
-            if ( Math.abs( playerIndex - 1 ) == 0 )
-            {
+        if (((playerIndex + 1) % 2) == 0) {
+            c = Color.BLACK;
+        } else {
+            c = Color.RED;
+        }
+        if (hasWon(loc, Location.NORTH, c) || hasWon(loc, Location.NORTHEAST, c)
+                || hasWon(loc, Location.NORTHWEST, c)
+                || hasWon(loc, Location.EAST, c)) {
+            if (((playerIndex + 1) % 2) == 0) {
                 result += "You won!";
-                JOptionPane.showMessageDialog( null,
-                    "You won!",
-                    "Victory!",
-                    JOptionPane.INFORMATION_MESSAGE );
+                JOptionPane.showMessageDialog(null, "You won!", "Victory!",
+                        JOptionPane.INFORMATION_MESSAGE);
                 win = true;
 
-            }
-            else
-            {
+            } else {
                 result += "I won!";
-                JOptionPane.showMessageDialog( null,
-                    "I won!",
-                    "Defeat",
-                    JOptionPane.INFORMATION_MESSAGE );
-                win = true;
+                JOptionPane.showMessageDialog(null, "I won!", "Defeat",
+                        JOptionPane.INFORMATION_MESSAGE);
+                win =true;
             }
-        }
-        else if ( !players[0].canPlay() && !players[1].canPlay() )
-        {
-            result += "You both lose -_-";
-            JOptionPane.showMessageDialog( null,
-                "Losers",
-                "Defeat",
-                JOptionPane.INFORMATION_MESSAGE );
-            win = true;
-        }
-        else
-        {
-            result = players[playerIndex].getName() + " to play.";
-        }
+        } else
+            result += players[playerIndex].getName() + " to play.";
 
         return result;
     }
@@ -182,44 +210,69 @@ public class ConnectGame
      *            The color of the chips to look for
      * @return returns whether or not a player has won.
      */
-    public boolean hasWon( Location loc, Color c1 )
+    public boolean hasWon(Location loc, int dir, Color c1)
     {
-        Location old = loc;
+//        Location old = loc;
+//
+//        Grid<Piece> board = world.getGrid();
+//        int count = 1;
+//
+//        while ( board.isValid( loc.getAdjacentLocation( Location.SOUTH ) )
+//            && board.get( loc.getAdjacentLocation( Location.SOUTH ) )
+//                .getColor()
+//                .equals( c1 ) )
+//        {
+//            // count++;
+//
+//            loc = loc.getAdjacentLocation( Location.SOUTH );
+//
+//        }
+//        while ( board.isValid( loc.getAdjacentLocation( Location.NORTH ) )
+//            && board.get( loc.getAdjacentLocation( Location.NORTH ) )
+//                .getColor()
+//                .equals( c1 ) )
+//        {
+//            count++;
+//            // old = old.getAdjacentLocation( Location.NORTH );
+//            loc = loc.getAdjacentLocation( Location.NORTH );
+//
+//        }
+//        if ( count >= 4 )
+//        {
+//            return true;
+//        }
+//        else
+//        {
+//            count = 0;
+//        }
+//
+//        return count >= 4;
+            Location old = loc;
 
-        Grid<Piece> board = world.getGrid();
-        int count = 1;
 
-        while ( board.isValid( loc.getAdjacentLocation( Location.SOUTH) )
-            && board.get( loc.getAdjacentLocation( Location.SOUTH ) )
-                .getColor()
-                .equals( c1 ) )
-        {
-            //count++;
+            Grid<Piece> board = world.getGrid();
+            int count = 1;
 
-            loc = loc.getAdjacentLocation( Location.SOUTH );
+            while (board
+                    .isValid(loc.getAdjacentLocation(dir + Location.HALF_CIRCLE))
+                    && board.get(loc.getAdjacentLocation(dir + Location.HALF_CIRCLE))
+                            .getColor().equals(c1)){
+                    count++;
+                
+                loc = loc.getAdjacentLocation(dir + Location.HALF_CIRCLE);
 
+            }
+            while (board
+                    .isValid(loc.getAdjacentLocation(dir + Location.HALF_CIRCLE))
+                    && board.get(loc.getAdjacentLocation(dir + Location.HALF_CIRCLE))
+                            .getColor().equals(c1)){
+                    count++;
+                old = old.getAdjacentLocation(dir);
+
+            }
+            return count >= 4;
         }
-        while ( board.isValid( loc.getAdjacentLocation( Location.NORTH ) )
-            && board.get( loc.getAdjacentLocation( Location.NORTH ) )
-                .getColor()
-                .equals( c1 ) )
-        {
-            count++;
-            //old = old.getAdjacentLocation( Location.NORTH );
-            loc = loc.getAdjacentLocation( Location.NORTH );
-
-        }
-        if(count >= 4)
-        {
-            return true;
-        }
-        else
-        {
-            count = 0;
-        }
-        
-        return count >= 4;
-    }
+    
 
 
     // accessors used primarily for testing
