@@ -15,11 +15,11 @@ import java.util.concurrent.Semaphore;
  * 
  *  @author  Joseph Thomas
  *  @author  5101324
- *  @version 4/8/14
+ *  @version 5/20/14
  *  @author  Period: 2
- *  @author  Assignment: GWOthello
+ *  @author  Assignment: Connect4FinalProject
  * 
- *  @author  Sources: Snarfed
+ *  @author  Sources: Vishwa Kode, Anshuman Dikhit
  */
 public class ConnectWorld extends World<Piece>
 {
@@ -119,6 +119,7 @@ public class ConnectWorld extends World<Piece>
     @Override
     public void setMessage(String msg)
     {
+        super.setMessage(" ");
         super.setMessage(msg);
         try
         { Thread.sleep(2000); }

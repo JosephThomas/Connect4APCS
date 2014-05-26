@@ -149,11 +149,11 @@ public abstract class ConnectPlayer
      * piece in that location.
      * @return 
      */
-    public Location play()
+    public void play()
     {
         Location playLocation = getPlay();
         bloard.get(playLocation).setColor(color);
-        return getPlay();
+        //return getPlay();
     }
     
 

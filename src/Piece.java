@@ -4,16 +4,19 @@ import java.awt.Color;
 /**
  * This represents a single piece on the board
  * 
- * @author 5101324
+ * @author Joseph Thomas
  * @version May 7, 2014
  * @author Period: 2
  * @author Assignment: Connect4
  * 
- * @author Sources: None
+ * @author Sources: Anshuman Dikhit, Vishwa Kode
  */
 public class Piece
 {
 
+    /**
+     * It's color
+     */
     private Color color;
 
 
@@ -41,8 +44,7 @@ public class Piece
 
 
     /**
-     * Sets the color of the piece. Only used in case we use different rules
-     * from Connect4
+     * Used to change pieces from white to red or black
      * 
      * @param newColor
      *            the new color for the piece

@@ -15,6 +15,11 @@ import java.awt.geom.Rectangle2D;
  * PieceDisplay.java
  * 
  * Provides code to draw a <CODE>Piece</CODE> object
+ * @author Joseph
+ * @version  5/28/13
+ * 
+ * @sources Anshuman Dikhit, Vishwa Kode
+ * 
  */
 public class PieceDisplay extends AbstractDisplay
 {
@@ -83,15 +88,16 @@ public class PieceDisplay extends AbstractDisplay
         g2.fill( ATX.createTransformedShape( rect ) );
         g2.scale( 1.0 / GRADIENT_SIZE, 1.0 / GRADIENT_SIZE );
         // fills in the circle for the chip
-        g2.setPaint( new GradientPaint( -GRADIENT_SIZE / 4,
-            -GRADIENT_SIZE / 2,
-            Color.WHITE,
-            GRADIENT_SIZE / 4,
-            GRADIENT_SIZE / 4,
-            pieceColor ) );
+        //g2.setPaint( new GradientPaint( -GRADIENT_SIZE / 4,
+        //    -GRADIENT_SIZE / 2,
+        //    Color.WHITE,
+        //    GRADIENT_SIZE / 4,
+        //    GRADIENT_SIZE / 4,
+        //    pieceColor ) );
+        g2.setPaint( pieceColor );
         g2.fill( ATX.createTransformedShape( body ) );
 
-        g2.scale( GRADIENT_SIZE, GRADIENT_SIZE );
+        //g2.scale( GRADIENT_SIZE, GRADIENT_SIZE );
         // stuff
     }
 }

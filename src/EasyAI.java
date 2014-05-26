@@ -10,11 +10,11 @@ import java.awt.Color;
  * 
  *  @author  Joseph Thomas
  *  @author  5101324
- *  @version 4/8/14
+ *  @version 5/18/14
  *  @author  Period: 2
  *  @author  Assignment: Connect4
  * 
- *  @author  Sources: None
+ *  @author  Sources: Vishwa Kode and Anshuman Dikhit
  */
 public class EasyAI extends ConnectPlayer
 {
@@ -24,7 +24,7 @@ public class EasyAI extends ConnectPlayer
      */
     public EasyAI(ConnectWorld world)
     {
-        super(world, "EasyComputer", Color.RED);
+        super(world, "Easy AI", Color.RED);
     }
 
     /**
@@ -34,7 +34,7 @@ public class EasyAI extends ConnectPlayer
      */
     public Location getPlay()
     {
-        ArrayList<Location> allowedMoves = getAllowedPlays();
+        ArrayList<Location> allowedMoves = this.getAllowedPlays();
         if(allowedMoves.size() != 0)
         {
             int rand = (int)(allowedMoves.size()*Math.random());

@@ -24,7 +24,7 @@ public class MediumAI extends ConnectPlayer
      */
     public MediumAI(ConnectWorld world)
     {
-        super(world, "EasyComputer", Color.RED);
+        super(world, "MediumComputer", Color.RED);
     }
 
     /**

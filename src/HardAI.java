@@ -24,7 +24,7 @@ public class HardAI extends ConnectPlayer
      */
     public HardAI(ConnectWorld world)
     {
-        super(world, "EasyComputer", Color.RED);
+        super(world, "HardComputer", Color.RED);
     }
 
     /**
