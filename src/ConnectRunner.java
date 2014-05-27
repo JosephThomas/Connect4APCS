@@ -7,13 +7,13 @@ import java.util.Scanner;
  * correct messages and lets the player choose the level of difficulty of
  * the AI
  * 
- *  @author  Joseph Thomas
+ *  @author  Vishwa Kode
  *  @author  5101324
  *  @version 5/14/14
  *  @author  Period: 2
  *  @author  Assignment: CS Final Project
  * 
- *  @author  Sources: Anshuman Dikhit, Vishwa Kode
+ *  @author  Sources: Anshuman Dikhit, Joseph Thomas
  */
 public class ConnectRunner {
     /**
@@ -22,19 +22,18 @@ public class ConnectRunner {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Welcome to Connect4");
         System.out.println("Rules: ");
         System.out
                 .println("Click on a column to place a chip at the bottom most slot possible");
         System.out
                 .println("You win when you get four in a row, diagonally, vertically, or horizontally");
-        System.out.println("Please enter your difficulty");
         System.out.println("To enter difficulty type easy, medium, or hard");
 
         System.out.print(" ");
-        int f = 0;
-        while (f == 0) {
+        boolean f = true;
+        while (f) {
             boolean b = false;
+            @SuppressWarnings("resource")
             Scanner console = new Scanner(System.in);
 
             String diff = console.next();
@@ -43,7 +42,7 @@ public class ConnectRunner {
                         || diff.equals("easy")) {
                     b = true;
                 } else if (diff.equalsIgnoreCase("quit")) {
-                    f = 1;
+                    f = false;
                     System.exit(0);
                 } else {
                     System.out
@@ -53,5 +52,6 @@ public class ConnectRunner {
             ConnectGame x = new ConnectGame(true, diff);
             x.playGame();
         }
+
     }
 }
