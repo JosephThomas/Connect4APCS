@@ -147,8 +147,7 @@ public abstract class ConnectPlayer {
 		return locs; 
 	}
 	/**
-	 * used for testing 
-	 * @return
+	 * @return the color of the player
 	 */
 	public Color getColor()
 	{
