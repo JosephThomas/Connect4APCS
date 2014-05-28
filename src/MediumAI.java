@@ -29,19 +29,19 @@ public class MediumAI extends ConnectPlayer {
 	 * the arrayList for all the possible moves with ratings based on the red
 	 * color. This is for the 
 	 */
-	private ArrayList<Prioritize> mapRed;
+	private ArrayList<Prioritize> redMoves;
 
 	/**
 	 * the arrayList for all the possible moves with ratings based on the yellow
 	 * color.
 	 */
-	private ArrayList<Prioritize> mapYel;
+	private ArrayList<Prioritize> yellowMoves;
 
 	/**
 	 * the arrayList for all the moves with the best rating out of the two other
 	 * arraylists.
 	 */
-	private ArrayList<Prioritize> moves;
+	private ArrayList<Prioritize> allMoves;
 
 	/**
 	 * the color of the AI
@@ -75,9 +75,9 @@ public class MediumAI extends ConnectPlayer {
 		hardness = 0;
 		color = Color.RED;
 		move = new TreeMap<Integer, Location>();
-		mapRed = new ArrayList<Prioritize>();
-		mapYel = new ArrayList<Prioritize>();
-		moves = new ArrayList<Prioritize>();
+		redMoves = new ArrayList<Prioritize>();
+		yellowMoves = new ArrayList<Prioritize>();
+		allMoves = new ArrayList<Prioritize>();
 		world = w;
 		grid = world.getGrid();
 	}
@@ -97,9 +97,9 @@ public class MediumAI extends ConnectPlayer {
 		hardness = 0;
 
 		color = r;
-		mapRed = new ArrayList<Prioritize>();
-        mapYel = new ArrayList<Prioritize>();
-        moves = new ArrayList<Prioritize>();
+		redMoves = new ArrayList<Prioritize>();
+        yellowMoves = new ArrayList<Prioritize>();
+        allMoves = new ArrayList<Prioritize>();
 		world = w;
 		grid = world.getGrid();
 	}
@@ -116,14 +116,14 @@ public class MediumAI extends ConnectPlayer {
 	public Location getPlay() {
 
 		getAllowedPlays();
-		if (moves.isEmpty()) {
+		if (allMoves.isEmpty()) {
 			return null;
 		} else {
-			while (!moves.isEmpty()) {
-				int x = (int) (Math.random() * moves.size());
+			while (!allMoves.isEmpty()) {
+				int x = (int) (Math.random() * allMoves.size());
 
-				move.put(moves.get(x).getRating(), moves.get(x).getLocation());
-				moves.remove(x);
+				move.put(allMoves.get(x).getRating(), allMoves.get(x).getLocation());
+				allMoves.remove(x);
 
 			}
 			int h;
@@ -131,7 +131,8 @@ public class MediumAI extends ConnectPlayer {
 			if (hardness % 2 == 0) {
 				h = move.size() / 2;
 			} else {
-				return move.pollFirstEntry().getValue();
+			    Object[] arrMoves = move.values().toArray();
+				return (Location)arrMoves[arrMoves.length -2];
 			}
 			hardness++;
 			int count = 0;
@@ -158,14 +159,14 @@ public class MediumAI extends ConnectPlayer {
 	 * @return returns all the possible locations to play at
 	 */
 	public ArrayList<Location> getAllowedPlays() {
-		while (!mapRed.isEmpty()) {
-			mapRed.remove(0);
+		while (!redMoves.isEmpty()) {
+			redMoves.remove(0);
 		}
-		while (!mapYel.isEmpty()) {
-			mapYel.remove(0);
+		while (!yellowMoves.isEmpty()) {
+			yellowMoves.remove(0);
 		}
-		while (!moves.isEmpty()) {
-			moves.remove(0);
+		while (!allMoves.isEmpty()) {
+			allMoves.remove(0);
 		}
 		int h = 0;
 		ArrayList<Location> x = new ArrayList<Location>();
@@ -181,7 +182,7 @@ public class MediumAI extends ConnectPlayer {
 							+ rate(mloc, Location.NORTHEAST, Color.red)
 							+ rate(mloc, Location.NORTHWEST, Color.red);
 
-					mapRed.add(new Prioritize(mloc, c));
+					redMoves.add(new Prioritize(mloc, c));
 					// gets the rating for each location for color yellow
 
 					int j = rate(mloc, Location.NORTH, Color.yellow)
@@ -189,7 +190,7 @@ public class MediumAI extends ConnectPlayer {
 							+ rate(mloc, Location.NORTHEAST, Color.yellow)
 							+ rate(mloc, Location.NORTHWEST, Color.yellow);
 
-					mapYel.add(new Prioritize(mloc, j));
+					yellowMoves.add(new Prioritize(mloc, j));
 					x.add(mloc);
 					break;
 				}
@@ -204,14 +205,14 @@ public class MediumAI extends ConnectPlayer {
 	 * location and rating to a different arraylist called moves.
 	 */
 	public ArrayList<Prioritize> findBest() {
-		for (int x = 0; x < mapRed.size(); x++) {
-			if (mapRed.get(x).getRating() > mapYel.get(x).getRating()) {
-				moves.add(mapRed.get(x));
+		for (int x = 0; x < redMoves.size(); x++) {
+			if (redMoves.get(x).getRating() > yellowMoves.get(x).getRating()) {
+				allMoves.add(redMoves.get(x));
 			} else {
-				moves.add(mapYel.get(x));
+				allMoves.add(yellowMoves.get(x));
 			}
 		}
-		return moves;
+		return allMoves;
 	}
 
 	/**
@@ -224,14 +225,8 @@ public class MediumAI extends ConnectPlayer {
 	}
 
 	/**
-	 * Uses a while loop that goes to the next chip in the same direction as
-	 * indicated. Stops when the chip is a different color. Multiplies count by
-	 * itself to differentiate between three in a row and one in a row for three
-	 * directions. It does the same in the opposite direction with a different
-	 * count. Adds the counts together and returns them. If the square roots of
-	 * the sums add up to 3 and the color is the same as the color of the HardAI
-	 * the rating 99999 is given so that the HardAI will place a move here to
-	 * win.
+	 * This assigns the ratings to the chips. It looks at chains of chips and
+	 * then assigns scores based on the signs of the chips.
 	 * 
 	 * @param loc
 	 *            the location that needs to be rated
@@ -284,15 +279,15 @@ public class MediumAI extends ConnectPlayer {
 	// The following methods are for testing
 
 	public ArrayList<Prioritize> getRed() {
-		return mapRed;
+		return redMoves;
 	}
 
 	public ArrayList<Prioritize> getYel() {
-		return mapYel;
+		return yellowMoves;
 	}
 
 	public ArrayList<Prioritize> getMoves() {
-		return moves;
+		return allMoves;
 	}
 
 	public TreeMap<Integer, Location> getMove() {

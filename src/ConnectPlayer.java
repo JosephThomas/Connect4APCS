@@ -3,6 +3,7 @@ import info.gridworld.grid.Location;
 import java.util.ArrayList;
 import java.awt.Color;
 
+
 /**
  * ConnectPlayer.java
  * 
@@ -16,142 +17,169 @@ import java.awt.Color;
  * 
  * @author Sources: None
  */
-public abstract class ConnectPlayer {
-	/** The world */
-	private ConnectWorld world;
+public abstract class ConnectPlayer
+{
+    /** The world */
+    private ConnectWorld world;
 
-	/** The grid */
-	private info.gridworld.grid.Grid<Piece> grid;
+    /** The grid */
+    private info.gridworld.grid.Grid<Piece> grid;
 
-	/** The name of the player */
-	private String name;
+    /** The name of the player */
+    private String name;
 
-	/** The color of this player's game pieces */
-	public Color color;
+    /** The color of this player's game pieces */
+    public Color color;
 
-	/**
-	 * Constructs an Connectplayer object.
-	 * 
-	 * @param w
-	 *            the world
-	 * @param n
-	 *            the name ("Human" or "Computer")
-	 * @param c
-	 *            the color
-	 */
-	public ConnectPlayer(ConnectWorld w, String n, Color c) {
-		world = w;
-		name = n;
-		color = c;
-		grid = world.getGrid();
-	}
 
-	/**
-	 * Gets the next move.
-	 * 
-	 * @return the location of the next move
-	 */
-	public abstract Location getPlay();
+    /**
+     * Constructs an Connectplayer object.
+     * 
+     * @param w
+     *            the world
+     * @param n
+     *            the name ("Human" or "Computer")
+     * @param c
+     *            the color
+     */
+    public ConnectPlayer( ConnectWorld w, String n, Color c )
+    {
+        world = w;
+        name = n;
+        color = c;
+        grid = world.getGrid();
+    }
 
-	/**
-	 * Gets the player name.
-	 * 
-	 * @return the player name
-	 */
-	public String getName() {
-		return name; // Replace with correct code
-	}
 
-	/**
-	 * Gets the Connect world.
-	 * 
-	 * @return the Connect world
-	 */
-	public ConnectWorld getWorld() {
-		return world;
-	}
+    /**
+     * Gets the next move.
+     * 
+     * @return the location of the next move
+     */
+    public abstract Location getPlay();
 
-	/**
-	 * Determines if the player can make a play.
-	 * 
-	 * @return true if the player can play; false otherwise
-	 */
-	public boolean canPlay() {
-		return this.getAllowedPlays().size() != 0;
-	}
 
-	/**
-	 * Computes the list of locations that the player may play
-	 * 
-	 * @return all the possible locations a move can be made.
-	 */
-	public ArrayList<Location> getAllowedPlays() {
-		ArrayList<Location> locs = new ArrayList<Location>();
-		locs = getEmptyLocations();
+    /**
+     * Gets the player name.
+     * 
+     * @return the player name
+     */
+    public String getName()
+    {
+        return name; // Replace with correct code
+    }
 
-		return locs;
-	}
 
-	/**
-	 * Determines if this play is allowed by the rules
-	 * 
-	 * @param loc
-	 *            location to be checked
-	 * @return true if this location is allowed to be played; false otherwise
-	 */
-	public boolean isAllowedPlay(Location loc) {
-		return getAllowedPlays().contains(loc); // Replace with correct code
-	}
+    /**
+     * Gets the Connect world.
+     * 
+     * @return the Connect world
+     */
+    public ConnectWorld getWorld()
+    {
+        return world;
+    }
 
-	/**
-     * Make the play indicated by calling getPlay.Changes the color of the
-     * piece in that location.
+
+    /**
+     * Determines if the player can make a play.
+     * 
+     * @return true if the player can play; false otherwise
+     */
+    public boolean canPlay()
+    {
+        return this.getAllowedPlays().size() != 0;
+    }
+
+
+    /**
+     * Computes the list of locations that the player may play
+     * 
+     * @return all the possible locations a move can be made.
+     */
+    public ArrayList<Location> getAllowedPlays()
+    {
+        ArrayList<Location> locs = new ArrayList<Location>();
+        locs = getEmptyLocations();
+
+        return locs;
+    }
+
+
+    /**
+     * Determines if this play is allowed by the rules
+     * 
+     * @param loc
+     *            location to be checked
+     * @return true if this location is allowed to be played; false otherwise
+     */
+    public boolean isAllowedPlay( Location loc )
+    {
+        return getAllowedPlays().contains( loc ); // Replace with correct code
+    }
+
+
+    /**
+     * Make the play indicated by calling getPlay.Changes the color of the piece
+     * in that location.
+     * 
      * @return Location returns the location that it plays
      */
-	public Location play() {
+    public Location play()
+    {
 
-		Location playLocation = getPlay();
+        Location playLocation = getPlay();
 
-		Piece t = new Piece(color);
-		
-		if (grid.get(playLocation) != null) {
+        Piece t = new Piece( color );
 
-			grid.get(playLocation).setColor(color);
+        if ( grid.get( playLocation ) != null )
+        {
 
-		} else {
-			grid.put(playLocation, t);
-		}
+            grid.get( playLocation ).setColor( color );
 
-	
-		return playLocation;
-	}
+        }
+        else
+        {
+            grid.put( playLocation, t );
+        }
 
-	/**
-	 * Determines the empty move locations on the board.
-	 * 
-	 * @return all the empty locations that a move can be made on 
-	 */
-	ArrayList<Location> getEmptyLocations() {
-		ArrayList<Location> locs = new ArrayList<Location>();
-		for (int row = 0; row < grid.getNumRows(); row++) {
-			for (int col = 0; col < grid.getNumCols(); col++) {
-				Location l = new Location(row, col);
+        return playLocation;
+    }
 
-				if (grid.get(l).getColor().equals(Color.white)) {
-					locs.add(l);
-				}
 
-			}
-		}
-		
-		return locs; 
-	}
-	/**
-	 * @return the color of the player
-	 */
-	public Color getColor()
-	{
-		return color;
-	}
+    /**
+     * Determines the empty move locations on the board. The empty locations
+     * are locations that contain a white piece.
+     * 
+     * @return all the empty locations that a move can be made on
+     */
+    ArrayList<Location> getEmptyLocations()
+    {
+        ArrayList<Location> locs = new ArrayList<Location>();
+        for ( int row = 0; row < grid.getNumRows(); row++ )
+        {
+            for ( int col = 0; col < grid.getNumCols(); col++ )
+            {
+                Location loc = new Location( row, col );
+
+                if ( grid.get( loc ).getColor().equals( Color.white ) )
+                {
+                    locs.add( loc );
+                }
+
+            }
+        }
+
+        return locs;
+    }
+
+
+    /**
+     * @return the color of the player
+     */
+    public Color getColor()
+    {
+        return color;
+    }
 
 }

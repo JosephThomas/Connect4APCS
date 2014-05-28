@@ -5,9 +5,9 @@ import info.gridworld.grid.Location;
  * The Prioritize class holds the rating and the Location of a possible move
  * location. It helps the AIs decide on which spaces to move to.
  * 
- * @author Vishwa Kode
+ * @author Joseph Thomas
  * @version 5/25/13
- * @sources Anshuman Dikhit, Joseph Thomas
+ * @sources Anshuman Dikhit, Vishwa Kode
  * 
  */
 

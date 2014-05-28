@@ -45,7 +45,7 @@ public class ConnectWorld extends World<Piece> {
 		this.game = game;
 		lock = new Semaphore(0);
 		playerLocation = null;
-		setMessage("Connect4 - You are yellow.  Click a cell to play.");
+		setMessage("Connect4 - You are yellow.  Click on a column to play.");
 
 		System.setProperty("info.gridworld.gui.selection", "hide");
 		System.setProperty("info.gridworld.gui.tooltips", "hide");
@@ -68,7 +68,7 @@ public class ConnectWorld extends World<Piece> {
 	@Override
 	public boolean locationClicked(Location loc) {
 		Location locs = loc;
-		for (int x = getGrid().getNumRows() - 1; x > 0; x--) {
+		for (int x = getGrid().getNumRows() - 1; x >= 0; x--) {
 			if (getGrid().get(new Location(x, loc.getCol())).getColor()
 					.equals(Color.white)) {
 				locs = new Location(x, loc.getCol());

@@ -43,6 +43,27 @@ public class EasyAI extends ConnectPlayer
     }
 
 
+    
+
+
+    /**
+     * Determines a randomly selected allowed move.
+     * 
+     * @return a random allowed more (if there is one); null otherwise
+     */
+    public Location getPlay()
+    {
+
+        ArrayList<Location> allowedMoves = this.getAllowedPlays();
+        if ( allowedMoves.size() != 0 )
+        {
+            int rand = (int)( allowedMoves.size() * Math.random() );
+            return allowedMoves.get( rand );
+        }
+        return null;
+
+    }
+    
     /**
      * Determines all the possible move locations.
      * 
@@ -68,25 +89,6 @@ public class EasyAI extends ConnectPlayer
         }
 
         return x;
-    }
-
-
-    /**
-     * Determines a randomly selected allowed move.
-     * 
-     * @return a random allowed more (if there is one); null otherwise
-     */
-    public Location getPlay()
-    {
-
-        ArrayList<Location> allowedMoves = this.getAllowedPlays();
-        if ( allowedMoves.size() != 0 )
-        {
-            int rand = (int)( allowedMoves.size() * Math.random() );
-            return allowedMoves.get( rand );
-        }
-        return null;
-
     }
 
 }
